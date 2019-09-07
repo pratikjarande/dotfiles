@@ -1,10 +1,11 @@
-# If you come from bash you might have to change your $PATH.
+# Local terminal configurations
 [ -f ~/.machine_profile ] && source ~/.machine_profile
+
+# If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -48,6 +49,9 @@ ZSH_THEME="dracula"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # You can set one of the optional three formats:
@@ -61,17 +65,33 @@ ZSH_THEME="dracula"
 
 # Make fzf work under Zsh on macOS
 export FZF_BASE="$HOME/.fzf"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#disable auto correct
+unsetopt correct_all
+unsetopt AUTO_CD
+
+# zsh syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  brew celery colorize docker docker-compose docker-machine git tmux virtualenvwrapper fzf
-)
+
+# Declare additional plugins in local config file (~/.machine_profile)
+[ -z "$plugins" ] && plugins=( git ) || plugins+=( git )
 
 source $ZSH/oh-my-zsh.sh
+
+# pure prompt zsh
+fpath+=( "$HOME/.zsh/pure" )
+autoload -U promptinit; promptinit
+prompt pure
+# prompt_newline='%666v'
+# PROMPT=" $PROMPT"
 
 # User configuration
 
@@ -91,7 +111,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -101,16 +121,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# pure prompt zsh
-fpath=( "$HOME/.zfunctions" $fpath )
-autoload -U promptinit; promptinit
-prompt pure
-# prompt_newline='%666v'
-# PROMPT=" $PROMPT"
-
-# zsh syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
