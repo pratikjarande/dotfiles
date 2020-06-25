@@ -50,6 +50,8 @@ Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'tmhedberg/simpylfold'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -220,10 +222,10 @@ else
 endif
 
 " Folding
-" set nofoldenable
+set nofoldenable
 
 " Python folding
-let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_docstring_preview = 0
 let g:SimplyFold_fold_docstring = 1
 let b:SimplyFold_fold_docstring = 1
 let g:SimplyFold_fold_import = 1
@@ -597,6 +599,9 @@ let g:jedi#use_tabs_not_buffers = 1
 " let g:jedi#use_splits_not_buffers = "top"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
+
+" Use deoplete for autocomplete
+let g:deoplete#enable_at_startup = 1
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
